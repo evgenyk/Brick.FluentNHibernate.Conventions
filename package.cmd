@@ -17,3 +17,6 @@ copy %CACHED_NUGET% .nuget\nuget.exe > nul
 
 
 :pack
+
+MD NuGet
+.nuget\nuget  pack
