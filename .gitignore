@@ -8,4 +8,4 @@ obj
 node_modules
 bower_components
 src/Prevue.Web/Content/Scripts/lib/*
-NuGet
+_GeneratedNuGetPackages

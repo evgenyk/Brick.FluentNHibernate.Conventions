@@ -18,5 +18,11 @@ copy %CACHED_NUGET% .nuget\nuget.exe > nul
 
 :pack
 
-MD NuGet
-.nuget\nuget  pack
+if not exist _GeneratedNuGetPackages MD _GeneratedNuGetPackages
+del _GeneratedNuGetPackages\*.*
+CD src\Brick.FluentNHibernate.Conventions
+..\..\.nuget\nuget pack -OutputDirectory ..\..\_GeneratedNuGetPackages -Symbols
+CD ..\..\_GeneratedNuGetPackages
+
+rem for /f %%X IN ('dir /b *.nupkg') do ..\.nuget\NuGet.exe push "%%~fX"
+CD ..
