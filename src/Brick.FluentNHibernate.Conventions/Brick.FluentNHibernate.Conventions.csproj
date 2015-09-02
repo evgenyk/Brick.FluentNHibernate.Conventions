@@ -62,6 +62,8 @@
     <Compile Include="Conventions\Attributes\TableNameAttribute.cs" />
     <Compile Include="Conventions\ColumnNullConvention.cs" />
     <Compile Include="Conventions\DiscriminatedSubclassNamingConvention.cs" />
+    <Compile Include="Conventions\ForeignKeyConvention.cs" />
+    <Compile Include="Conventions\ManyToManyConvention.cs" />
     <Compile Include="Conventions\ManyToOneConvention.cs" />
     <Compile Include="Conventions\OneToManyConvention.cs" />
     <Compile Include="Conventions\PrimaryKeyConvention.cs" />

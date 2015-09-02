@@ -14,7 +14,7 @@ namespace Brick.FluentNHibernate.Conventions.Conventions
             if (instance.Property.MemberInfo.IsDefined(typeof (NotNullAttribute), false))
                 instance.Not.Nullable();
 
-            var columnName = (attr != null ? attr.TableName : instance.Property.PropertyType.Name) + "Id";
+            var columnName = string.Format("{0}Id", (attr != null ? attr.TableName : instance.Property.PropertyType.Name));
             instance.Column(columnName);
         }
     }

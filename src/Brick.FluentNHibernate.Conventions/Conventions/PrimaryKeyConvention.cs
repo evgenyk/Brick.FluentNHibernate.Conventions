@@ -24,7 +24,8 @@ namespace Brick.FluentNHibernate.Conventions.Conventions
         {
             var props = target.GetProperties(BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.Public);
 
-            var idProp = props.FirstOrDefault(prop => prop.Name.Equals("Id", StringComparison.InvariantCultureIgnoreCase));
+            var idProp =
+                props.FirstOrDefault(prop => prop.Name.Equals("Id", StringComparison.InvariantCultureIgnoreCase));
             if (idProp != null)
                 return idProp;
 

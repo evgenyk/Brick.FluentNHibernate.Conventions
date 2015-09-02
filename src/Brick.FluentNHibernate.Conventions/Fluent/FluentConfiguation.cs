@@ -32,6 +32,8 @@ namespace Brick.FluentNHibernate.Conventions.Fluent
                         new DiscriminatedSubclassNamingConvention(),
                         new PrimaryKeyConvention(),
                         new ColumnNullConvention(),
+                        new ManyToManyConvention(),
+                        new ForeignKeyConvention(),
                         DefaultCascade.All(),
                         DefaultLazy.Always(),
                         DynamicInsert.AlwaysTrue(),
