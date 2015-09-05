@@ -7,7 +7,10 @@ namespace Brick.FluentNHibernate.Conventions.Conventions
     {
         protected override string GetKeyName(Member property, Type type)
         {
-            return property == null ? string.Format("{0}Id", type.Name) : string.Format("{0}Id", property.Name);
+            if (property == null)
+                return type.Name + "Fk";
+
+            return property.Name + "Fk";
         }
     }
 }

@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conventions\Attributes\DiscriminatorValueAttribute.cs" />
+    <Compile Include="Conventions\Attributes\HasManyToManyAttribute.cs" />
     <Compile Include="Conventions\Attributes\IdAttribute.cs" />
     <Compile Include="Conventions\Attributes\NotNullAttribute.cs" />
     <Compile Include="Conventions\Attributes\TableNameAttribute.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Conventions\PrimaryKeyConvention.cs" />
     <Compile Include="Conventions\PrimaryKeyGeneratorConvention.cs" />
     <Compile Include="Conventions\TableNameConvention.cs" />
+    <Compile Include="Fluent\DatabaseDialect.cs" />
     <Compile Include="Fluent\FluentConfiguation.cs" />
     <Compile Include="Fluent\FluentConfigurationBase.cs" />
     <Compile Include="Fluent\NamespacedConfigurationOf.cs" />

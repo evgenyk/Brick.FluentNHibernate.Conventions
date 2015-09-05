@@ -1,4 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Brick.FluentNHibernate.Conventions.Conventions;
+using FluentNHibernate.Automapping;
+using FluentNHibernate.Automapping.Steps;
+using FluentNHibernate.Conventions;
 
 namespace Brick.FluentNHibernate.Conventions.Fluent
 {
@@ -9,6 +15,21 @@ namespace Brick.FluentNHibernate.Conventions.Fluent
         public NamespacedConfigurationOf()
         {
             _ns = typeof (T).Namespace;
+        }
+
+        public override IEnumerable<IAutomappingStep> GetMappingSteps(AutoMapper mapper, IConventionFinder conventionFinder)
+        {
+            return base.GetMappingSteps(mapper, conventionFinder).Select(GetDecoratedStep);
+        }
+
+        IAutomappingStep GetDecoratedStep(IAutomappingStep step)
+        {
+            if (step is HasManyToManyStep)
+            {
+                return new ExplicitHasManyToManyStep(this, step);
+            }
+
+            return step;
         }
 
         public override bool ShouldMap(Type type)
