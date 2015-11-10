@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using Brick.FluentNHibernate.Conventions.Conventions;
+using Brick.FluentNHibernate.Conventions.Conventions.Attributes;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.Helpers;
 using NHibernate.Driver;
+using NHibernate.Util;
 
 namespace Brick.FluentNHibernate.Conventions.Fluent
 {
@@ -32,12 +36,26 @@ namespace Brick.FluentNHibernate.Conventions.Fluent
 
             configuration.Mappings(m => m.FluentMappings.AddFromAssemblyOf<T>()).Mappings(m =>
             {
-                var autoPersistenceModel = AutoMap.Assemblies(
-                    new NamespacedConfigurationOf<T>(),
-                    typeof (T).Assembly)
+                var namespacedConfigurationOf = new NamespacedConfigurationOf<T>();
+                var mappedAssembly = typeof (T).Assembly;
+
+                var model = AutoMap.Assemblies(namespacedConfigurationOf, mappedAssembly);
+
+                var autoPersistenceModel = model
                     .IgnoreBase(typeof (Identity<>))
                     .IgnoreBase(typeof (Identity)
                     );
+
+                var typesToMap = mappedAssembly.GetTypes()
+                    .Where(type => namespacedConfigurationOf.ShouldMap(type)).ToList();
+
+                typesToMap
+                    .Where(x => x.GetCustomAttributes<DiscriminatorIncludeBaseAttribute>(false).Any())
+                    .ForEach(type => model.IncludeBase(type));
+
+                typesToMap
+                    .Where(x => x.GetCustomAttributes<DiscriminatorIgnoreBaseAttribute>(false).Any())
+                    .ForEach(type => model.IgnoreBase(type));
 
                 var persistenceModel = autoPersistenceModel.Conventions.Add(
                     new TableNameConvention(),

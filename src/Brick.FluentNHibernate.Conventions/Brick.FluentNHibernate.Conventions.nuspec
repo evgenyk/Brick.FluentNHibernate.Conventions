@@ -2,14 +2,16 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>Brick.FluentNHibernate.Conventions</id>
-    <version>1.0.0.6</version>
     <title>Brick.FluentNHibernate.Conventions</title>
+
+    <version>1.0.0.7</version>
+
     <authors>Evgeny Komarevtsev</authors>
     <owners>Evgeny Komarevtsev</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Fluent NHibernate conventions and sample nhibernate configuration builder</description>
+    <description>Drop-in opinionated Fluent NHibernate auto-conventions and sample nhibernate configuration builder. </description>
     <dependencies>
-      <dependency id="FluentNHibernate" version="[2.0.1.0]" />
+      <dependency id="FluentNHibernate" version="[2.0.3.0]" />
       <dependency id="Pluralizer" version="[0.3.0.1]" />
     </dependencies>
   </metadata>
