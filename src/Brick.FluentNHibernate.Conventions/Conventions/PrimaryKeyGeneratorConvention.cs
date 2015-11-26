@@ -9,9 +9,10 @@ namespace Brick.FluentNHibernate.Conventions.Conventions
         public void Apply(IIdentityInstance id)
         {
             if (id.Type == typeof (Guid)) id.GeneratedBy.GuidComb();
-            else if (id.Type == typeof (string)) id.GeneratedBy.UuidHex("N");
             else if (id.Type == typeof (int)) id.GeneratedBy.Identity();
             else if (id.Type == typeof (long)) id.GeneratedBy.Identity();
+
+            else if (id.Type == typeof(string)) id.GeneratedBy.Assigned();
             else id.GeneratedBy.Assigned();
         }
 
