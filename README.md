@@ -3,7 +3,7 @@
 ### A non-discriptive sample omitting details
 ```
 // maps all classes in the namespace of `<T>` and applies default conventions
-var configuration = FluentConfiguation.CreateBasedOn<T>(sql.ToConnectionString());
+var configuration = FluentConfiguation.CreateBasedOn<T>(sqlConnectionString);
 
 //builds NHibernate session factory
 var sessionFactory = configuration.BuildSessionFactory();
@@ -17,7 +17,7 @@ var session = sessionFactory.OpenSession();
 
 When the first `ISession` is requested, the `schemaUpdate` (you need to create this one) object would contain all scripts you could run to get database schema up to speed.
 ```
-var configuration = FluentConfiguation.CreateBasedOn<T>(sql.ToConnectionString());
+var configuration = FluentConfiguation.CreateBasedOn<T>(sqlConnectionString);
 
 configuration.ExposeConfiguration(x =>
             {
