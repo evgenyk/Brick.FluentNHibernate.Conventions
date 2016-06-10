@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Brick.FluentNHibernate.Conventions.Conventions;
@@ -16,8 +17,10 @@ namespace Brick.FluentNHibernate.Conventions.Fluent
     public static class FluentConfiguation
     {
         public static FluentConfiguration CreateBasedOn<T>(string connectionString,
-            DatabaseDialect dialect = DatabaseDialect.MsSql2012) where T : class
+            DatabaseDialect dialect = DatabaseDialect.MsSql2012, IEnumerable<IConvention> additionalConventions = null) where T : class
         {
+            if (additionalConventions == null)
+                additionalConventions = new IConvention[] {};
             var configuration = Fluently.Configure();
 
             switch (dialect)
@@ -70,6 +73,9 @@ namespace Brick.FluentNHibernate.Conventions.Fluent
                     DynamicInsert.AlwaysTrue(),
                     DynamicUpdate.AlwaysTrue()
                     );
+
+                foreach (var additionalConvention in additionalConventions)
+                    autoPersistenceModel.Conventions.Add(additionalConvention);
 
                 m.AutoMappings.Add(persistenceModel);
             });

@@ -32,7 +32,7 @@ namespace Brick.FluentNHibernate.Conventions.Conventions
             var idPropsWithAttributes = props.Where(x => x.GetCustomAttribute<IdAttribute>() != null).ToList();
 
             if (idPropsWithAttributes.Count() > 1)
-                throw new Exception(string.Format("More than one IdAttribute was defined on {0}", target.GetType()));
+                throw new Exception($"More than one IdAttribute was defined on {target}");
 
             return idPropsWithAttributes.FirstOrDefault();
         }

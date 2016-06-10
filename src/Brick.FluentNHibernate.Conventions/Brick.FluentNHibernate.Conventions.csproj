@@ -60,6 +60,7 @@
     <Compile Include="Conventions\Attributes\DiscriminatorIgnoreBaseAttribute.cs" />
     <Compile Include="Conventions\Attributes\DiscriminatorValueAttribute.cs" />
     <Compile Include="Conventions\Attributes\HasManyToManyAttribute.cs" />
+    <Compile Include="Conventions\Attributes\IdAssignedAttribute.cs" />
     <Compile Include="Conventions\Attributes\IdAttribute.cs" />
     <Compile Include="Conventions\Attributes\DiscriminatorIncludeBaseAttribute.cs" />
     <Compile Include="Conventions\Attributes\NotNullAttribute.cs" />
