@@ -76,12 +76,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InterfaceBasedMapping\IMapThisNamespaceMarkerInterface.cs" />
+    <Compile Include="InterfaceBasedMapping\NameSpace1\Account.cs" />
+    <Compile Include="InterfaceBasedMapping\NameSpace2\Image.cs" />
+    <Compile Include="InterfaceBasedMapping\NameSpace2\Role.cs" />
+    <Compile Include="InterfaceBasedMapping\NameSpace2\User.cs" />
+    <Compile Include="InterfaceBasedMapping\NameSpace2\UserRoles.cs" />
     <Compile Include="MappedObjects\Account.cs" />
     <Compile Include="MappedObjects\Image.cs" />
     <Compile Include="MappedObjects\Role.cs" />
     <Compile Include="MappedObjects\User.cs" />
     <Compile Include="MappedObjects\UserRoles.cs" />
-    <Compile Include="MappingTests.cs" />
+    <Compile Include="MappingTestsMarkerInterfaceConvention.cs" />
+    <Compile Include="MappingTestsNamspacedConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

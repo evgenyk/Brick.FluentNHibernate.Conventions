@@ -74,10 +74,13 @@
     <Compile Include="Conventions\PrimaryKeyConvention.cs" />
     <Compile Include="Conventions\PrimaryKeyGeneratorConvention.cs" />
     <Compile Include="Conventions\TableNameConvention.cs" />
+    <Compile Include="Fluent\AssemblyExtensions.cs" />
     <Compile Include="Fluent\DatabaseDialect.cs" />
     <Compile Include="Fluent\FluentConfiguation.cs" />
     <Compile Include="Fluent\FluentConfigurationBase.cs" />
+    <Compile Include="Fluent\IBrickFluentConfiguration.cs" />
     <Compile Include="Fluent\NamespacedConfigurationOf.cs" />
+    <Compile Include="Fluent\NamespacesOfAMarkerInterface.cs" />
     <Compile Include="Identity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

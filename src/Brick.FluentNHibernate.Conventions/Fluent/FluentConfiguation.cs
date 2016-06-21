@@ -16,8 +16,9 @@ namespace Brick.FluentNHibernate.Conventions.Fluent
 {
     public static class FluentConfiguation
     {
-        public static FluentConfiguration CreateBasedOn<T>(string connectionString,
-            DatabaseDialect dialect = DatabaseDialect.MsSql2012, IEnumerable<IConvention> additionalConventions = null) where T : class
+        public static FluentConfiguration CreateBasedOn<TConfiguration>(string connectionString,
+            DatabaseDialect dialect = DatabaseDialect.MsSql2012, IEnumerable<IConvention> additionalConventions = null) 
+            where TConfiguration: IBrickFluentConfiguration, new()
         {
             if (additionalConventions == null)
                 additionalConventions = new IConvention[] {};
@@ -37,20 +38,26 @@ namespace Brick.FluentNHibernate.Conventions.Fluent
                     throw new ArgumentOutOfRangeException(nameof(dialect), dialect, null);
             }
 
-            configuration.Mappings(m => m.FluentMappings.AddFromAssemblyOf<T>()).Mappings(m =>
-            {
-                var namespacedConfigurationOf = new NamespacedConfigurationOf<T>();
-                var mappedAssembly = typeof (T).Assembly;
+            var config = new TConfiguration();
 
-                var model = AutoMap.Assemblies(namespacedConfigurationOf, mappedAssembly);
+            var fluentConfiguration = configuration.Mappings(m =>
+            {
+                foreach (var assembly in config.AssembliesToScan)
+                    m.FluentMappings.AddFromAssembly(assembly);
+            });
+
+            fluentConfiguration.Mappings(m =>
+            {
+
+                var model = AutoMap.Assemblies(config, config.AssembliesToScan);
 
                 var autoPersistenceModel = model
                     .IgnoreBase(typeof (Identity<>))
                     .IgnoreBase(typeof (Identity)
                     );
 
-                var typesToMap = mappedAssembly.GetTypes()
-                    .Where(type => namespacedConfigurationOf.ShouldMap(type)).ToList();
+                var typesToMap = config.AssembliesToScan.SelectMany(asm => asm.GetTypes())
+                    .Where(type => config.ShouldMap(type)).ToList();
 
                 typesToMap
                     .Where(x => x.GetCustomAttributes<DiscriminatorIncludeBaseAttribute>(false).Any())

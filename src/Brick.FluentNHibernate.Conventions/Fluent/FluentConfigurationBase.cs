@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Reflection;
 using Brick.FluentNHibernate.Conventions.Conventions.Attributes;
 using FluentNHibernate;

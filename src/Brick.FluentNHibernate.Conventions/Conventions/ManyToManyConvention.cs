@@ -7,6 +7,7 @@ using FluentNHibernate.Mapping;
 using FluentNHibernate.MappingModel;
 using FluentNHibernate.MappingModel.ClassBased;
 using FluentNHibernate.MappingModel.Collections;
+#pragma warning disable 612
 
 namespace Brick.FluentNHibernate.Conventions.Conventions
 {

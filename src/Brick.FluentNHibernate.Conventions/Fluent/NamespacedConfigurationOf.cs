@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Brick.FluentNHibernate.Conventions.Conventions;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Steps;
@@ -8,7 +9,7 @@ using FluentNHibernate.Conventions;
 
 namespace Brick.FluentNHibernate.Conventions.Fluent
 {
-    public class NamespacedConfigurationOf<T> : FluentConfigurationBase
+    public class NamespacedConfigurationOf<T> : FluentConfigurationBase, IBrickFluentConfiguration
     {
         private readonly string _ns;
 
@@ -38,5 +39,11 @@ namespace Brick.FluentNHibernate.Conventions.Fluent
                             type.Namespace.StartsWith(_ns, StringComparison.InvariantCultureIgnoreCase);
             return shouldMap;
         }
+
+        public IEnumerable<Assembly> AssembliesToScan
+        {
+            get { yield return typeof(T).Assembly; }
+        }
     }
+
 }
